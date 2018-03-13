@@ -1,9 +1,8 @@
 import { Component } from "@angular/core";
 
 @Component({
-    selector: "ns-app",
-    templateUrl: "app.component.html",
-    styleUrls: ['./app.css']
+    selector: "ns-app", 
+    templateUrl: "app.component.html", 
 })
 
 export class AppComponent { }
