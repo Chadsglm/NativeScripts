@@ -6,6 +6,8 @@ import { NativeScriptHttpModule }           from "nativescript-angular/http";
 import { NativeScriptUISideDrawerModule }   from "nativescript-telerik-ui/sidedrawer/angular";
 import { TNSFontIconModule }                from 'nativescript-ngx-fonticon';
 import { NativeScriptUIListViewModule }     from "nativescript-telerik-ui/listview/angular";
+import { NativeScriptFormsModule }          from "nativescript-angular/forms";
+import { ReactiveFormsModule }              from '@angular/forms';
 
 import { MenuComponent }                    from './menu/menu.component';
 import { DishdetailComponent }              from "./dishdetail/dishdetail.component";
@@ -41,7 +43,9 @@ import { DrawerComponent }                  from "./shared/drawer/drawer.compone
         TNSFontIconModule.forRoot({
             'fa': './fonts/font-awesome.min.css'
         }),
-        NativeScriptUIListViewModule
+        NativeScriptUIListViewModule,
+        NativeScriptFormsModule,
+        ReactiveFormsModule
     ],
     declarations: [
         AppComponent,
