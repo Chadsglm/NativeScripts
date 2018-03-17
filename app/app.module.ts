@@ -15,6 +15,8 @@ import { HomeComponent }                    from "./home/home.component";
 import { ContactComponent }                 from "./contact/contact.component";
 import { AboutComponent }                   from "./about/about.component";
 import { FavoritesComponent }               from "./favorites/favorites.component";
+import { ReservationComponent }             from "./reservation/reservation.component";
+import { ReservationModalComponent }        from "./reservationmodal/reservationmodal.component";
 
 import { DishService }                      from './services/dish.service';
 import { ProcessHTTPMsgService }            from './services/process-httpmsg.service';
@@ -55,8 +57,11 @@ import { DrawerComponent }                  from "./shared/drawer/drawer.compone
         HomeComponent,
         ContactComponent,
         AboutComponent,
-        FavoritesComponent
+        FavoritesComponent,
+        ReservationComponent,
+        ReservationModalComponent
     ],
+    entryComponents: [ReservationModalComponent],
     providers: [
         {provide: 'BaseURL', useValue: baseURL},
         DishService,
