@@ -1,7 +1,7 @@
 import { ViewChild, ChangeDetectorRef, 
          AfterViewInit }                from "@angular/core";
 import { RadSideDrawerComponent, 
-         SideDrawerType }               from "nativescript-telerik-ui/sidedrawer/angular";
+         SideDrawerType }               from "nativescript-ui-sidedrawer/angular";
 
 export class DrawerPage implements AfterViewInit {
 

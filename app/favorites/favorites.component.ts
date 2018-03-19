@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, 
          ViewChild, ChangeDetectorRef }         from '@angular/core';
-import { ListViewEventData, RadListView }       from 'nativescript-telerik-ui/listview';
-import { RadListViewComponent }                 from 'nativescript-telerik-ui/listview/angular';
+import { ListViewEventData, RadListView }       from 'nativescript-ui-listview';
+import { RadListViewComponent }                 from 'nativescript-ui-listview/angular';
 import { ObservableArray }                      from 'tns-core-modules/data/observable-array';
 import { confirm }                              from "ui/dialogs";
 import { Toasty }                               from 'nativescript-toasty';
@@ -11,33 +11,6 @@ import { FavoriteService }                      from '../services/favorite.servi
 import { Dish }                                 from '../shared/dish';
 import { DrawerPage }                           from '../shared/drawer/drawer.page';
 
-
-
-/*
-import { Component, OnInit, Inject, 
-         ViewChild, ChangeDetectorRef }         from '@angular/core';
-import { ListViewEventData, RadListView }       from 'nativescript-telerik-ui/listview';
-import * as listViewModule                           from "nativescript-pro-ui/listview";
-import { RadListViewComponent }                 from 'nativescript-telerik-ui/listview/angular';
-import { ObservableArray }                      from 'tns-core-modules/data/observable-array';
-import { confirm }                              from "ui/dialogs";
-import { Toasty }                               from 'nativescript-toasty';
-import * as viewModule                              from 'tns-core-modules/ui/core/view';
-import { FavoriteService }                      from '../services/favorite.service';
-import { Dish }                                 from '../shared/dish';
-import { DrawerPage }                           from '../shared/drawer/drawer.page';
-
-public onSwipeCellStarted(args: listViewModule.SwipeActionsEventData) {
-    var swipeLimits = args.data.swipeLimits;
-    var swipeView = args.object;
-    var leftItem = swipeView.getViewById<viewModule.View>('mark-view');
-    var rightItem = swipeView.getViewById<viewModule.View>('delete-view');
-    swipeLimits.left = leftItem.getMeasuredWidth();
-    swipeLimits.right = rightItem.getMeasuredWidth();
-    swipeLimits.threshold = leftItem.getMeasuredWidth() / 2; 
-}
-
-*/
 
 
 
