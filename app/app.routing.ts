@@ -9,6 +9,7 @@ import { ContactComponent }             from "./contact/contact.component";
 import { AboutComponent }               from "./about/about.component";
 import { FavoritesComponent }           from './favorites/favorites.component';
 import { ReservationComponent }         from "./reservation/reservation.component";
+import { CommentComponent }             from "./comment/comment.component";
 
 const routes: Routes = [
     { path: "", redirectTo: "/home", pathMatch: "full" },
@@ -18,6 +19,7 @@ const routes: Routes = [
     { path: "about", component: AboutComponent  },
     { path: "favorites", component: FavoritesComponent },
     { path: "reservation", component: ReservationComponent },
+    { path: "Comment", component: CommentComponent },
     { path: "dishdetail/:id", component: DishdetailComponent }
 ];
 

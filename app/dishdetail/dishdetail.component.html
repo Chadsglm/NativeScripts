@@ -1,8 +1,14 @@
 <ActionBar title="Dish Details" class="action-bar">
     <NavigationButton android.systemIcon="ic_menu_back" (tap)="goBack()"></NavigationButton>
+    <ActionItem android.systemicon="ic_menu_more" ios.systemicon="9" 
+                ios.position="right"
+                (tap)="displayActionDialog()">
+    </ActionItem>
 </ActionBar>
+
 <ScrollView orientation="vertical">
     <GridLayout class="m-5" rows="auto auto auto" *ngIf="dish">
+        
         <StackLayout row="0" class="p-10 border"> 
             <Image [src]="BaseURL + dish.image"></Image>
             <StackLayout>
@@ -16,14 +22,14 @@
                 <Button row="0" col="1" [text]="numcomments + ' comments'" 
                         class="btn btn-rounded-sm btn-outline no-border">
                 </Button>
-                <Button row="0" col="2" [text]="(favorite ? 'fa fa-heart' : 'fa fa-heart') | fonticon" 
+                <Button row="0" col="2"  [text]="(favorite ? 'fa-heart' : 'fa-heart-o') | fonticon" 
                         class="btn btn-rounded-sm btn-outline no-border fa" 
                         (tap)="addToFavorites()">
                 </Button>
             </GridLayout>
         </StackLayout>
         <Label row="1" height="40" class="p-10 m-t-10 h3" text="Comments"></Label>
-        <ListView row="2" height="500" [items]="dish.comments" class="list-group p-10">
+        <ListView row="2" [height]="dish.comments.length*100" [items]="dish.comments" class="list-group p-10">
             <ng-template let-comment="item">
                 <StackLayout class="list-group-item">
                     <Label class="list-group-item-heading" [text]="comment.comment" textWrap="true"></Label>
