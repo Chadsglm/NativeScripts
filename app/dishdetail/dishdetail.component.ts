@@ -3,26 +3,28 @@ import { Component, OnInit, Inject,
 import { Dish }                         from '../shared/dish';
 import { Comment }                      from '../shared/comment';
 import { DishService }                  from '../services/dish.service';
-import { ActivatedRoute, Params }       from '@angular/router';
-import { RouterExtensions }             from 'nativescript-angular/router';
 import { FavoriteService }              from '../services/favorite.service';
 import { TNSFontIconService }           from 'nativescript-ngx-fonticon';
+import { ActivatedRoute, Params }       from '@angular/router';
+import { RouterExtensions }             from 'nativescript-angular/router';
 import { Toasty }                       from 'nativescript-toasty'
 import { action }                       from "ui/dialogs";
-import { Validators, FormBuilder, 
-         FormGroup}                     from '@angular/forms';
 import { ModalDialogService, 
          ModalDialogOptions }           from "nativescript-angular/modal-dialog";
-import { ViewContainerRef }             from "@angular/core";
 import { CommentComponent }             from "../comment/comment.component";
 import { Page }                         from "ui/page";
 import { Animation, 
          AnimationDefinition }          from "ui/animation";
-import { View }                         from "ui/core/view";
 import { SwipeGestureEventData, 
          SwipeDirection }               from "ui/gestures";
 import { Color }                        from 'color';
 import * as enums                       from "ui/enums";
+import { View }                         from "ui/core/view";
+
+import { ViewContainerRef }             from "@angular/core";
+
+import * as SocialShare                 from "nativescript-social-share";
+import { ImageSource, fromUrl }         from "image-source";
 
 import 'rxjs/add/operator/switchMap';
 
@@ -33,32 +35,30 @@ import 'rxjs/add/operator/switchMap';
 })
 export class DishdetailComponent implements OnInit {
 
-    commentForm: FormGroup;
-
-    avgstars: string;
-    numcomments: number;
-    favorite: boolean = false;
 
     dish: Dish;
     comment: Comment;
     errMess: string;
 
-    showComments: boolean = false;
+    avgstars: string;
+    numcomments: number;
+    favorite: boolean = false;
 
+    showComments: boolean = false;
     cardImage: View;
     commentList: View;
     cardLayout: View;
 
     constructor(private dishservice: DishService,
-                private route: ActivatedRoute,
-                private routerExtensions: RouterExtensions,
                 private favoriteservice: FavoriteService,
                 private fonticon: TNSFontIconService,
-                private formBuilder: FormBuilder,
+                private route: ActivatedRoute,
+                private routerExtensions: RouterExtensions,
+                private vcRef: ViewContainerRef,
                 private modalService: ModalDialogService,
                 private page: Page,
                 @Inject('BaseURL') private BaseURL,
-                private vcRef: ViewContainerRef) {
+                ) {
     }
 
     ngOnInit() {
@@ -84,20 +84,30 @@ export class DishdetailComponent implements OnInit {
 
     addToFavorites() {
         if (!this.favorite) {
-            console.log('Adding to Favorites', this.dish.id);
             this.favorite = this.favoriteservice.addFavorite(this.dish.id);
             const toast = new Toasty("Added Dish "+ this.dish.id, "short", "bottom");
             toast.show();
         }
     }
 
-    displayActionDialog(){
 
+    socialShare() {
+        let image: ImageSource;
+
+        fromUrl(this.BaseURL + this.dish.image)
+            .then((img: ImageSource) => {
+                image = img; 
+                SocialShare.shareImage(image, "How would you like to share this image?")
+            })
+            .catch(()=> { console.log('Error loading image'); });
+    }
+
+    displayActionDialog(){
         let options = {
             title: "Actions",
-            message: "Actions",
+            message: "Choose your Actions",
             cancelButtonText: "Cancel",
-            actions: ["Add to Favorites", "Add Comment"]
+            actions: ["Add to Favorites", "Add Comment", "Social Sharing"]
         };
 
         action(options).then((result) => {
@@ -106,13 +116,13 @@ export class DishdetailComponent implements OnInit {
             if(result === "Add to Favorites"){
                 this.addToFavorites();
             }
-
-            if(result === "Add Comment"){
+            else if(result === "Add Comment"){
                 this.createCommentModalView();
-
+            }
+            else if (result === 'Social Sharing') {
+                this.socialShare();
             }
         });
-
     }
 
 
@@ -129,7 +139,7 @@ export class DishdetailComponent implements OnInit {
                 this.dishservice.saveDish(this.dish)
                     .subscribe(result => { 
                         this.updateDetailsView(result);
-                     });
+                    });
             });
     }
 
@@ -140,19 +150,18 @@ export class DishdetailComponent implements OnInit {
     onSwipe(args: SwipeGestureEventData) {
 
         if (this.dish) {
-          this.cardImage = <View>this.page.getViewById<View>("cardImage");
-          this.cardLayout = <View>this.page.getViewById<View>("cardLayout");
-          this.commentList = <View>this.page.getViewById<View>("commentList");
-    
-          if (args.direction === SwipeDirection.up && !this.showComments ) {
-            this.animateUp();
-          }
-          else if (args.direction === SwipeDirection.down && this.showComments ) {
-            this.showComments = false;
-            this.animateDown();
-          }
+            this.cardImage = <View>this.page.getViewById<View>("cardImage");
+            this.cardLayout = <View>this.page.getViewById<View>("cardLayout");
+            this.commentList = <View>this.page.getViewById<View>("commentList");
+
+            if (args.direction === SwipeDirection.up && !this.showComments ) {
+                this.animateUp();
+            }
+            else if (args.direction === SwipeDirection.down && this.showComments ) {
+                this.showComments = false;
+                this.animateDown();
+            }
         }
-    
       }
     
     showAndHideComments() {
@@ -161,11 +170,11 @@ export class DishdetailComponent implements OnInit {
         this.commentList = <View>this.page.getViewById<View>("commentList");
 
         if (!this.showComments ) {
-        this.animateUp();
+            this.animateUp();
         }
         else if (this.showComments ) {
-        this.showComments = false;
-        this.animateDown();
+            this.showComments = false;
+            this.animateDown();
         }
     }
 
