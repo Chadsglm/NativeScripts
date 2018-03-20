@@ -99,7 +99,6 @@ export class FavoritesComponent extends DrawerPage implements OnInit {
         swipeLimits.left = leftItem.getMeasuredWidth();
         swipeLimits.right = rightItem.getMeasuredWidth();
         swipeLimits.threshold = leftItem.getMeasuredWidth()/2;
-        alert('movements' + swipeLimits.left);
     }
 
  
