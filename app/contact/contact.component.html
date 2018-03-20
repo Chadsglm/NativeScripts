@@ -11,19 +11,27 @@
             <drawer-content></drawer-content>
         </StackLayout>
     </ScrollView>
-    <StackLayout tkMainContent="" class="page">
-        <StackLayout class="m-5">
-            <StackLayout class="p-10 border" rows="auto">
-                <Label class="h2" text="Our Address"></Label>
-                <StackLayout class="p-15">
-                    <Label class="body" text="121, Clear Water Bay Road"></Label>
-                    <Label class="body" text="Clear Water Bay, Kowloon"></Label> 
-                    <Label class="body" text="HONG KONG"></Label>
-                    <Label class="body" text="Tel: +852 1234 5678"></Label>
-                    <Label class="body" text="Fax: +852 8765 4321"></Label>
-                    <Label class="body" text="Email:confusion@food.net"></Label>
-                </StackLayout>
+    <ScrollView tkMainContent="" class="page">
+        <GridLayout class="m-5" rows="auto">
+            <StackLayout class="p-10 border" row="0">
+                <Label class="h3 text-primary" text="Contact Information"></Label>
+                <Label class="body text-primary" text="
+                        121, Clear Water Bay Road
+                        Clear Water Bay, Kowloon
+                        HONG KONG
+                        Tel: +852 1234 5678
+                        Fax: +852 8765 4321
+                        Email:confusion@food.net" textWrap="true">
+                </Label>
+                <GridLayout orientation="horizontal" rows="*" columns="*, *" class="m-t-20">
+                    <Button row="0" col="0" [text]="('fa-phone' | fonticon) + ' Call'" 
+                            class="btn btn-rounded-sm btn-outline no-border fa ">
+                    </Button>
+                    <Button row="0" col="1" [text]="('fa-envelope-o' | fonticon) + ' Email'" 
+                            class="btn btn-rounded-sm btn-outline no-border fa" (tap)="sendEmail()">
+                    </Button>
+                </GridLayout>  
             </StackLayout>
-        </StackLayout>
-    </StackLayout>
+        </GridLayout>
+    </ScrollView>
 </RadSideDrawer>
