@@ -26,6 +26,7 @@ import { PromotionService }                 from "./services/promotion.service";
 import { LeaderService }                    from "./services/leader.service";
 import { FavoriteService }                  from "./services/favorite.service";
 import { CouchbaseService }                 from "./services/couchbase.service";
+import { PlatformService }                  from "./services/platform.service";
 
 import { baseURL }                          from './shared/baseurl';
 import { DrawerComponent }                  from "./shared/drawer/drawer.component";
@@ -74,7 +75,8 @@ import { DrawerComponent }                  from "./shared/drawer/drawer.compone
         PromotionService,
         LeaderService,
         FavoriteService,
-        CouchbaseService
+        CouchbaseService,
+        PlatformService
     ],
     schemas: [
         NO_ERRORS_SCHEMA
