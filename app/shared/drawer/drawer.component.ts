@@ -11,6 +11,7 @@ export class DrawerComponent {
 
     constructor(private fonticon: TNSFontIconService) { }
 
+    /*
     displayLoginDialog() {
         let options = {
             title: "Login",
@@ -29,4 +30,5 @@ export class DrawerComponent {
             () => { console.log('Login cancelled'); 
         });
     }
+    */
 }

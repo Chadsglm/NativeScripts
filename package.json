@@ -24,6 +24,7 @@
 		"@angular/router": "~5.2.0",
 		"font-awesome": "^4.7.0",
 		"nativescript-angular": "~5.2.0",
+		"nativescript-camera": "^4.0.1",
 		"nativescript-couchbase": "^1.0.18",
 		"nativescript-email": "^1.5.1",
 		"nativescript-local-notifications": "^2.0.3",
