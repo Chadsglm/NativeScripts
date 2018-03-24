@@ -3,6 +3,7 @@ import { Component, OnInit,
 import { DrawerPage }                       from '../shared/drawer/drawer.page';
 import { TNSFontIconService }               from 'nativescript-ngx-fonticon';
 import * as Email                           from 'nativescript-email';
+import * as TNSPhone                        from 'nativescript-phone';
 
 @Component({
 selector: 'app-menu',
@@ -21,8 +22,7 @@ export class ContactComponent extends DrawerPage implements OnInit{
     ngOnInit(){}
 
     sendEmail() {
-
-        Email.available()
+      Email.available()
           .then((avail: boolean) => {
             if (avail) {
               Email.compose({
@@ -35,5 +35,9 @@ export class ContactComponent extends DrawerPage implements OnInit{
               console.log('No Email Configured');
           })
     
-      }
+    }
+
+    callRestaurant() {
+      TNSPhone.dial('415-123-4567', true);
+    }
 }

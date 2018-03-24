@@ -5,6 +5,7 @@ import { getString, setString }                 from 'application-settings';
 import { RouterExtensions }                     from 'nativescript-angular/router';
 import * as camera                              from 'nativescript-camera';
 import { Image }                                from 'ui/image';
+import * as imagepicker                         from "nativescript-imagepicker";
 
 @Component({
     moduleId: module.id,
@@ -15,10 +16,15 @@ export class UserAuthComponent implements OnInit {
     loginForm: FormGroup;
     registerForm: FormGroup;
     tabSelectedIndex: number = 0;
+    context: any;
+    selectedImage: any;
+    
 
     constructor(private page: Page,
                 private routerExtensions: RouterExtensions,
                 private formBuilder: FormBuilder) {
+        
+        this.context = imagepicker.create({ mode: "single" });
 
         this.loginForm = this.formBuilder.group({
             userName: [getString('userName', ''), Validators.required],
@@ -82,6 +88,24 @@ export class UserAuthComponent implements OnInit {
             'password': this.registerForm.get('password').value});
 
             this.tabSelectedIndex = 0;
+    }
+
+    getFromLibrary(){
+        const context = this.context;
+        context
+        .authorize()
+        .then(function () {
+
+            return context.present();
+        })
+        .then( (selection) => {
+            selection.forEach( (selected_item) => {
+                this.selectedImage = selected_item.android;
+                console.log('iamge url ', selected_item.android); 
+            });
+        }).catch(function (e) {
+            console.log(e.eventName);
+        });
     }
 
 }

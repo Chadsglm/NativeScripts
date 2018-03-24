@@ -34,15 +34,15 @@
         <StackLayout class="form">
             <GridLayout rows="auto, auto, auto" columns="*">
                 <Label class="h3 font-weight-bold" row="0" col="0"
-                       text="Your Picture"></Label>
-                <Image id="myPicture" row="1" col="0" src="res://rcflogo"
+                       text="Your Picture"></Label> 
+                <Image id="myPicture" row="1" col="0" src="{{ selectedImage ? selectedImage : 'res://rcflogo'}}"
                        height="100" width="100"></Image>
                 <GridLayout row="2" col="0" orientation="horizontal"
                             rows="*" columns="*, *" class="m-t-10">
                     <Button row="0" col="0" text="Take Picture"
                             class="btn btn-rounded-sm btn-outline" (tap)="takePicture()"></Button>
                     <Button row="0" col="1" text="Select Image"
-                            class="btn btn-rounded-sm btn-outline"></Button>
+                            class="btn btn-rounded-sm btn-outline" (tap)="getFromLibrary()"></Button>
                 </GridLayout>
             </GridLayout>
             <GridLayout class="input-field input-sides" rows="auto, auto, auto, auto, auto, auto, auto" 
